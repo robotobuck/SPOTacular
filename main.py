@@ -1,6 +1,13 @@
 import randomRobotData
-
+# Constants
+NUM_OF_ROBOTS = 5
+NUM_OF_AREAS = 3
 # This will be replaced when real data becomes available
 # This should be called again for every new section of land to survey
-robotData = randomRobotData.generateRandomData(5)
-print("Generated Robot Data: \n", robotData)
+robotData = []
+for _ in range(NUM_OF_AREAS):
+  robotData.append(randomRobotData.generateRandomData(NUM_OF_ROBOTS))
+
+print("Robot stats by area: ")
+for areaStats in robotData:
+  print(areaStats)
