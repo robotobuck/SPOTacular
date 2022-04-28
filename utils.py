@@ -4,5 +4,6 @@ def getAreaTypeList():
       'swamp',
       'wooded',
       'grassy',
-      'hardpack'
+      'hardpack',
+      'unkown'
     ]
