@@ -7,3 +7,11 @@ def getAreaTypeList():
       'hardpack',
       'unkown'
     ]
+
+def getRobotTypes():
+  return [
+    "submarine",
+    "car",
+    "drone",
+    "spot"
+  ]

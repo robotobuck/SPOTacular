@@ -1,6 +1,7 @@
 from area import AreaToSuvey
 import randomRobotData
 import auction
+from robot import Robot
 
 # Constants
 NUM_OF_ROBOTS = 5
@@ -21,5 +22,9 @@ optimalRobots = auction.assignAreas(robotData)
 print("Optimal Robots: ", optimalRobots)
 
 # Define area types
-area0 = AreaToSuvey("First Area", 25, 25, 'grassy')
+area0 = AreaToSuvey(25, 25, 'grassy')
 area0.displayAreaDetails()
+
+# Define Robot Types
+robot0 = Robot('submarine')
+robot0.displayRobotDetails()

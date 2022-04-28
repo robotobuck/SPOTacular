@@ -2,8 +2,7 @@ import utils
 
 
 class AreaToSuvey:
-  def __init__(self, name, length, width, enviornment):
-    self.__name = name
+  def __init__(self, length, width, enviornment):
     self.__length = length
     self.__width = width
     self.__environmentType = enviornment
@@ -11,7 +10,7 @@ class AreaToSuvey:
     self.checkAndSetEnvironmentType()
   
   def displayAreaDetails(self):
-    print(f'Area \'{self.__name}\' details:')
+    print("Area Details: ")
     print(f'Length: {self.__length}')
     print(f'Width: {self.__width}')
     print(f'Type: {self.__environmentType}')
@@ -34,5 +33,3 @@ class AreaToSuvey:
   def getEnvironmentType(self):
     return self.__environmentType
   
-  def getName(self):
-    return self.__name
