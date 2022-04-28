@@ -1,11 +1,11 @@
 import utils
 
 
-class AreaToSuvey:
-  def __init__(self, length, width, enviornment):
+class AreaToSurvey:
+  def __init__(self, length, width, environment):
     self.__length = length
     self.__width = width
-    self.__environmentType = enviornment
+    self.__environmentType = environment
 
     self.checkAndSetEnvironmentType()
   
