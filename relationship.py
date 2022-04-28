@@ -27,3 +27,10 @@ class RelationshipBetweenRobotAndArea:
         self.__ability = 10
         self.__efficiency = 100
     # Submarine cannot do anything if the area is out of the water, its ability stays at 0
+
+  def carAbility(self):
+    env = self.__area.getEnvironmentType()
+    if env == 'wooded':
+      # The car works best when it can move fast, with trees in the way it is unable to use its full potential
+      self.__ability = 7
+      self.__efficiency = 40 
