@@ -1,3 +1,4 @@
+from area import AreaToSuvey
 import randomRobotData
 import auction
 
@@ -18,3 +19,7 @@ for areaStats in robotData:
 # Find best robot for each area
 optimalRobots = auction.assignAreas(robotData)
 print("Optimal Robots: ", optimalRobots)
+
+# Define area types
+area0 = AreaToSuvey("First Area", 25, 25, 'grassy')
+area0.displayAreaDetails()
