@@ -13,3 +13,6 @@ class Robot:
   def checkRobotType(self):
     if self.__robotType not in utils.getRobotTypes():
       self.__robotType = "Unkown"
+  
+  def getRobotType(self):
+    return self.__robotType

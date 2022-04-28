@@ -1,6 +1,7 @@
 from area import AreaToSuvey
 import randomRobotData
 import auction
+from relationship import RelationshipBetweenRobotAndArea
 from robot import Robot
 
 # Constants
@@ -22,9 +23,16 @@ optimalRobots = auction.assignAreas(robotData)
 print("Optimal Robots: ", optimalRobots)
 
 # Define area types
-area0 = AreaToSuvey(25, 25, 'grassy')
-area0.displayAreaDetails()
+areas = []
+areas.append(AreaToSuvey(10, 10, 'water'))
+areas.append(AreaToSuvey(10, 10, 'grassy'))
 
 # Define Robot Types
-robot0 = Robot('submarine')
-robot0.displayRobotDetails()
+robots = []
+robots.append(Robot('submarine'))
+
+# Define Relationships
+for a in areas:
+  for r in robots:
+    relationship = RelationshipBetweenRobotAndArea(r, a)
+    relationship.displayRelationshipInfo()
