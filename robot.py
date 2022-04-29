@@ -22,14 +22,26 @@ class Spot(Robot):
     def __init__(self):
         super().__init__('legged')
 
+    def bidSimple(self, area, row, col):
+        return 0
+
 class AgileX(Robot):
     def __init__(self):
         super().__init__('wheeled')
+
+    def bidSimple(self, area, row, col):
+        return 0
 
 class BlueROV2(Robot):
     def __init__(self):
         super().__init__('submarine')
 
+    def bidSimple(self, area, row, col):
+        return 0
+
 class IntelAero(Robot):
     def __init__(self):
         super().__init__('aerial')
+
+    def bidSimple(self, area, row, col):
+        return 0
