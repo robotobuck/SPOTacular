@@ -14,11 +14,11 @@ class RelationshipBetweenRobotAndArea:
   def findAbilityAndEfficiency(self):
     if self.__robot.getRobotType() == 'submarine':
       self.submarineAbility()
-    if self.__robot.getRobotType() == 'car':
+    if self.__robot.getRobotType() == 'wheeled':
       self.carAbility()
-    if self.__robot.getRobotType() == 'drone':
+    if self.__robot.getRobotType() == 'aerial':
       self.droneAbility()
-    if self.__robot.getRobotType() == 'spot':
+    if self.__robot.getRobotType() == 'legged':
       self.spotAbility()
 
   def displayRelationshipInfo(self):

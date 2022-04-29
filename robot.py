@@ -16,3 +16,20 @@ class Robot:
   
   def getRobotType(self):
     return self.__robotType
+
+
+class Spot(Robot):
+    def __init__(self):
+        super().__init__('legged')
+
+class AgileX(Robot):
+    def __init__(self):
+        super().__init__('wheeled')
+
+class BlueROV2(Robot):
+    def __init__(self):
+        super().__init__('submarine')
+
+class IntelAero(Robot):
+    def __init__(self):
+        super().__init__('aerial')

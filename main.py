@@ -2,7 +2,7 @@ from area import AreaToSurvey
 import randomRobotData
 import auction
 from relationship import RelationshipBetweenRobotAndArea
-from robot import Robot
+from robot import Spot, AgileX, BlueROV2, IntelAero
 
 # Constants
 NUM_OF_ROBOTS = 5
@@ -21,26 +21,23 @@ for areaStats in robotData:
 optimalRobots = auction.assignAreas(robotData)
 print("Optimal Robots: ", optimalRobots)
 
-# Define area types
-areas = []
-areas.append(AreaToSurvey(10, 10, 'water'))
-areas.append(AreaToSurvey(10, 10, 'grassy'))
-areas.append(AreaToSurvey(20, 20, 'swamp'))
-areas.append(AreaToSurvey(15, 15, 'wooded'))
-areas.append(AreaToSurvey(10, 10, 'hardpack'))
-areas.append(AreaToSurvey(10, 10, 'unknown'))
+# Define area
+areas = [ [AreaToSurvey(10, 10, 'grassy'), AreaToSurvey(10, 10, 'wooded'), AreaToSurvey(20, 20, 'rocky'), AreaToSurvey(15, 15, 'grassy')],
+            [AreaToSurvey(10, 10, 'wooded'), AreaToSurvey(10, 10, 'wooded'), AreaToSurvey(20, 20, 'water'), AreaToSurvey(15, 15, 'grassy')],
+            [AreaToSurvey(10, 10, 'rocky'), AreaToSurvey(10, 10, 'wooded'), AreaToSurvey(20, 20, 'water'), AreaToSurvey(15, 15, 'grassy')] ]
 
 
 # Define Robot Types
 robots = []
-robots.append(Robot('submarine'))
-robots.append(Robot('car'))
-robots.append(Robot('drone'))
-robots.append(Robot('spot'))
+robots.append(Spot())
+robots.append(AgileX())
+robots.append(BlueROV2())
+robots.append(IntelAero())
 
 
 # Define Relationships
-for a in areas:
-    for r in robots:
-        relationship = RelationshipBetweenRobotAndArea(r, a)
-        relationship.displayRelationshipInfo()
+for areaRow in areas:
+    for a in areaRow:
+        for r in robots:
+            relationship = RelationshipBetweenRobotAndArea(r, a)
+            relationship.displayRelationshipInfo()

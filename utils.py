@@ -1,17 +1,16 @@
 def getAreaTypeList():
   return [
       'water',
-      'swamp',
       'wooded',
       'grassy',
-      'hardpack',
+      'rocky',
       'unkown'
     ]
 
 def getRobotTypes():
   return [
     "submarine",
-    "car",
-    "drone",
-    "spot"
+    "wheeled",
+    "aerial",
+    "legged"
   ]
