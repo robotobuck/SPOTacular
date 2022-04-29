@@ -27,14 +27,16 @@ from robot import Spot, AgileX, BlueROV2, IntelAero
 robots = [ Spot(), AgileX(), BlueROV2(), IntelAero() ]
 
 # Define search area
-searchArea = [ [AreaToSurvey(10, 10, 'grassy'), AreaToSurvey(10, 10, 'wooded'), AreaToSurvey(20, 20, 'rocky'), AreaToSurvey(15, 15, 'grassy')],
-            [AreaToSurvey(10, 10, 'wooded'), AreaToSurvey(10, 10, 'wooded'), AreaToSurvey(20, 20, 'water'), AreaToSurvey(15, 15, 'grassy')],
-            [AreaToSurvey(10, 10, 'rocky'), AreaToSurvey(10, 10, 'wooded'), AreaToSurvey(20, 20, 'water'), AreaToSurvey(15, 15, 'grassy')] ]
+searchArea = [ [AreaToSurvey(10, 10, 'grassy', 0, 0), AreaToSurvey(10, 10, 'wooded', 0, 1), AreaToSurvey(20, 20, 'rocky', 0, 2), AreaToSurvey(15, 15, 'grassy', 0, 3)],
+            [AreaToSurvey(10, 10, 'grassy', 1, 0), AreaToSurvey(10, 10, 'wooded', 1, 1), AreaToSurvey(20, 20, 'rocky', 1, 2), AreaToSurvey(15, 15, 'grassy', 1, 3)],
+            [AreaToSurvey(10, 10, 'grassy', 2, 0), AreaToSurvey(10, 10, 'wooded', 2, 1), AreaToSurvey(20, 20, 'rocky', 2, 2), AreaToSurvey(15, 15, 'grassy', 2, 3)],
+            [AreaToSurvey(10, 10, 'grassy', 3, 0), AreaToSurvey(10, 10, 'wooded', 3, 1), AreaToSurvey(20, 20, 'rocky', 3, 2), AreaToSurvey(15, 15, 'grassy', 3, 3)] ]
 
 # run auctions
 auction = Auction()
-print(auction.sequentialSingle(searchArea, Auction.BFS))
-print(auction.sequentialSingle(searchArea, Auction.DFS))
+auction.sequentialSingle(robots, searchArea, 3, 1, Auction.BFS)
+auction.sequentialSingle(robots, searchArea, 3, 1, Auction.DFS)
+auction.combinatorial(robots, searchArea)
 
 # Define Relationships
 #for r in range(len(searchArea)):

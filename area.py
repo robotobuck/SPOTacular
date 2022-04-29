@@ -2,10 +2,29 @@ import utils
 
 
 class AreaToSurvey:
-  def __init__(self, length, width, environment):
+  def __init__(self, length, width, environment, row, col):
     self.__length = length
     self.__width = width
     self.__environmentType = environment
+
+    #to help with searches
+    self.visited = False
+    self.processed = False
+    self.row = row
+    self.col = col
+
+    if row == 0:
+        self.r = 'A'
+    elif row == 1:
+        self.r = 'B'
+    elif row == 2:
+        self.r = 'C'
+    elif row == 3:
+        self.r = 'D'
+    else:
+        self.r = 'Invalid'
+
+    self.c = col
 
     self.checkAndSetEnvironmentType()
   
