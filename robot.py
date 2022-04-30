@@ -4,7 +4,7 @@ import utils
 class Robot:
     def __init__(self, robotType, maxAreas):
         self.__robotType = robotType
-        self.__maxAreas = maxAreas
+        self.maxAreas = maxAreas
         self.areaAssignments = []
 
         self.checkRobotType()
@@ -46,7 +46,7 @@ class Spot(Robot):
         distanceToArea = abs(self.row - row) + abs(self.col - col)
         # Only bid if the area is close enough
         if distanceToArea <= self.maxTravel:
-            bid = self.maxTravel - distanceToArea * 100 / self.maxTravel
+            bid = ((self.maxTravel - distanceToArea) / self.maxTravel) * (100 * (self.maxAreas - len(self.areaAssignments)) / self.maxAreas)
         return bid
 
 class AgileX(Robot):
@@ -72,7 +72,7 @@ class AgileX(Robot):
         distanceToArea = abs(self.row - row) + abs(self.col - col)
         # Only bid if the area is close enough
         if distanceToArea <= self.maxTravel:
-            bid = self.maxTravel - distanceToArea * 100 / self.maxTravel
+            bid = ((self.maxTravel - distanceToArea) / self.maxTravel) * (100 * (self.maxAreas - len(self.areaAssignments)) / self.maxAreas)
         return bid
 
 class BlueROV2(Robot):
@@ -98,7 +98,7 @@ class BlueROV2(Robot):
         distanceToArea = abs(self.row - row) + abs(self.col - col)
         # Only bid if the area is close enough
         if distanceToArea <= self.maxTravel:
-            bid = self.maxTravel - distanceToArea * 100 / self.maxTravel
+            bid = ((self.maxTravel - distanceToArea) / self.maxTravel) * (100 * (self.maxAreas - len(self.areaAssignments)) / self.maxAreas)
         return bid
 
 class IntelAero(Robot):
@@ -124,5 +124,5 @@ class IntelAero(Robot):
         distanceToArea = abs(self.row - row) + abs(self.col - col)
         # Only bid if the area is close enough
         if distanceToArea <= self.maxTravel:
-            bid = self.maxTravel - distanceToArea * 100 / self.maxTravel
+            bid = ((self.maxTravel - distanceToArea) / self.maxTravel) * (100 * (self.maxAreas - len(self.areaAssignments)) / self.maxAreas)
         return bid

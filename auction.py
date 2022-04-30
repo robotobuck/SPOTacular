@@ -1,10 +1,14 @@
+from area import AreaToSurvey
+from robot import Robot
+
+
 class Auction:
     """
     Auction class - operates different types of auctions
     """
     BFS = "bfs"
     DFS = "dfs"
-    def __init__(self, robots, searchArea):
+    def __init__(self, robots: Robot, searchArea: AreaToSurvey):
         self.robots = robots
         self.searchArea = searchArea
         
@@ -77,7 +81,13 @@ class Auction:
         """
         Execute auction
         """
-        print("run auction")
+        print("Running Auction")
+        for area in order:
+            bids = []
+            for bot in self.robots:
+                bids.append(bot.bidSingle(area, area.row, area.col))
+            print(f"Bids for Area {area.r+str(area.c)}", bids)
+
 
     def __ssDFS(self, row, col):
         """
