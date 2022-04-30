@@ -45,7 +45,7 @@ class Spot(Robot):
         bid = -1
         distanceToArea = abs(self.row - row) + abs(self.col - col)
         # Only bid if the area is close enough
-        if distanceToArea <= self.maxTravel:
+        if distanceToArea <= self.maxTravel and self.maxAreas > len(self.areaAssignments):
             bid = ((self.maxTravel - distanceToArea) / self.maxTravel) * (100 * (self.maxAreas - len(self.areaAssignments)) / self.maxAreas)
         return bid
 
@@ -71,7 +71,7 @@ class AgileX(Robot):
         bid = -1
         distanceToArea = abs(self.row - row) + abs(self.col - col)
         # Only bid if the area is close enough
-        if distanceToArea <= self.maxTravel:
+        if distanceToArea <= self.maxTravel and self.maxAreas > len(self.areaAssignments):
             bid = ((self.maxTravel - distanceToArea) / self.maxTravel) * (100 * (self.maxAreas - len(self.areaAssignments)) / self.maxAreas)
         return bid
 
@@ -97,7 +97,7 @@ class BlueROV2(Robot):
         bid = -1
         distanceToArea = abs(self.row - row) + abs(self.col - col)
         # Only bid if the area is close enough
-        if distanceToArea <= self.maxTravel:
+        if distanceToArea <= self.maxTravel and self.maxAreas > len(self.areaAssignments):
             bid = ((self.maxTravel - distanceToArea) / self.maxTravel) * (100 * (self.maxAreas - len(self.areaAssignments)) / self.maxAreas)
         return bid
 
@@ -108,7 +108,7 @@ class IntelAero(Robot):
         @params
         startRow, startCol - start coordinates of robot
         """
-        super().__init__('legged', 8)
+        super().__init__('aerial', 8)
         self.row = startRow
         self.col = startCol
         self.maxTravel = 6
@@ -123,6 +123,6 @@ class IntelAero(Robot):
         bid = -1
         distanceToArea = abs(self.row - row) + abs(self.col - col)
         # Only bid if the area is close enough
-        if distanceToArea <= self.maxTravel:
+        if distanceToArea <= self.maxTravel and self.maxAreas > len(self.areaAssignments):
             bid = ((self.maxTravel - distanceToArea) / self.maxTravel) * (100 * (self.maxAreas - len(self.areaAssignments)) / self.maxAreas)
         return bid

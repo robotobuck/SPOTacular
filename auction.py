@@ -82,12 +82,28 @@ class Auction:
         Execute auction
         """
         print("Running Auction")
+        self.__resetRobots()
         for area in order:
             bids = []
-            for bot in self.robots:
-                bids.append(bot.bidSingle(area, area.row, area.col))
-            print(f"Bids for Area {area.r+str(area.c)}", bids)
+            winningBot = 0
+            winningBid = -1
+            for bot in range(len(self.robots)):
+                botBid = self.robots[bot].bidSingle(area, area.row, area.col)
+                bids.append(botBid)
+                if botBid > winningBid:
+                    winningBot = bot
+                    winningBid = botBid
+            if winningBid >= 0:
+                self.robots[winningBot].assignArea(area)
+                self.robots[winningBot].row = area.row
+                self.robots[winningBot].col = area.col
+            # If no bid >= 0 no robot can survery the area
+        for bot in self.robots:
+            print(f"Robot type \"{bot.getRobotType()}\" assigned to survey {len(bot.areaAssignments)} areas: ", [(area.r + str(area.c)) for area in bot.areaAssignments])
 
+    def __resetRobots(self):
+        for bot in self.robots:
+            bot.areaAssignments = []
 
     def __ssDFS(self, row, col):
         """
@@ -149,18 +165,3 @@ class Auction:
         searchArea - area to search/auction
         """
         print("Combinatorial")
-
-def assignAreas(allAreaData):
-  optimalRobots = []
-  for areaData in allAreaData:
-    optimalRobots.append(selectBestFitRobotForArea(areaData))
-  return optimalRobots
-
-def selectBestFitRobotForArea(areaData):
-  bestIndex = 0
-  bestEfficiency = 0
-  for i in range(len(areaData)):
-    if bestEfficiency < areaData[i]['efficiency']:
-      bestIndex = i
-      bestEfficiency = areaData[i]['efficiency']
-  return bestIndex
