@@ -33,6 +33,7 @@ class Spot(Robot):
         super().__init__('legged', 4)
         self.row = startRow
         self.col = startCol
+        self.maxTravel = 4
 
     def bidSingle(self, area, row, col):
         """
@@ -41,7 +42,12 @@ class Spot(Robot):
         area - search area
         row, col - current area for bid
         """
-        return 0
+        bid = -1
+        distanceToArea = abs(self.row - row) + abs(self.col - col)
+        # Only bid if the area is close enough
+        if distanceToArea <= self.maxTravel:
+            bid = self.maxTravel - distanceToArea * 100 / self.maxTravel
+        return bid
 
 class AgileX(Robot):
     def __init__(self, startRow, startCol):
@@ -53,6 +59,7 @@ class AgileX(Robot):
         super().__init__('wheeled', 6)
         self.row = startRow
         self.col = startCol
+        self.maxTravel = 5
 
     def bidSingle(self, area, row, col):
         """
@@ -61,7 +68,12 @@ class AgileX(Robot):
         area - search area
         row, col - current area for bid
         """
-        return 0
+        bid = -1
+        distanceToArea = abs(self.row - row) + abs(self.col - col)
+        # Only bid if the area is close enough
+        if distanceToArea <= self.maxTravel:
+            bid = self.maxTravel - distanceToArea * 100 / self.maxTravel
+        return bid
 
 class BlueROV2(Robot):
     def __init__(self, startRow, startCol):
@@ -73,6 +85,7 @@ class BlueROV2(Robot):
         super().__init__('submarine', 2)
         self.row = startRow
         self.col = startCol
+        self.maxTravel = 2
 
     def bidSingle(self, area, row, col):
         """
@@ -81,7 +94,12 @@ class BlueROV2(Robot):
         area - search area
         row, col - current area for bid
         """
-        return 0
+        bid = -1
+        distanceToArea = abs(self.row - row) + abs(self.col - col)
+        # Only bid if the area is close enough
+        if distanceToArea <= self.maxTravel:
+            bid = self.maxTravel - distanceToArea * 100 / self.maxTravel
+        return bid
 
 class IntelAero(Robot):
     def __init__(self, startRow, startCol):
@@ -93,6 +111,7 @@ class IntelAero(Robot):
         super().__init__('legged', 8)
         self.row = startRow
         self.col = startCol
+        self.maxTravel = 6
 
     def bidSingle(self, area, row, col):
         """
@@ -101,4 +120,9 @@ class IntelAero(Robot):
         area - search area
         row, col - current area for bid
         """
-        return 0
+        bid = -1
+        distanceToArea = abs(self.row - row) + abs(self.col - col)
+        # Only bid if the area is close enough
+        if distanceToArea <= self.maxTravel:
+            bid = self.maxTravel - distanceToArea * 100 / self.maxTravel
+        return bid
