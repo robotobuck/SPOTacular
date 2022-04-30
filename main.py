@@ -22,20 +22,22 @@ from robot import Spot, AgileX, BlueROV2, IntelAero
 #print("Optimal Robots: ", optimalRobots)
 
 
-
-# Initialize Robots
-robots = [ Spot(), AgileX(), BlueROV2(), IntelAero() ]
-
 # Define search area
 searchArea = [ [AreaToSurvey(10, 10, 'grassy', 0, 0), AreaToSurvey(10, 10, 'wooded', 0, 1), AreaToSurvey(20, 20, 'rocky', 0, 2), AreaToSurvey(15, 15, 'grassy', 0, 3)],
             [AreaToSurvey(10, 10, 'grassy', 1, 0), AreaToSurvey(10, 10, 'wooded', 1, 1), AreaToSurvey(20, 20, 'rocky', 1, 2), AreaToSurvey(15, 15, 'grassy', 1, 3)],
             [AreaToSurvey(10, 10, 'grassy', 2, 0), AreaToSurvey(10, 10, 'wooded', 2, 1), AreaToSurvey(20, 20, 'rocky', 2, 2), AreaToSurvey(15, 15, 'grassy', 2, 3)],
             [AreaToSurvey(10, 10, 'grassy', 3, 0), AreaToSurvey(10, 10, 'wooded', 3, 1), AreaToSurvey(20, 20, 'rocky', 3, 2), AreaToSurvey(15, 15, 'grassy', 3, 3)] ]
 
-# run auctions
-auction = Auction()
-auction.sequentialSingle(robots, searchArea, 3, 1, Auction.BFS)
-auction.sequentialSingle(robots, searchArea, 3, 1, Auction.DFS)
+
+# Initialize Robots
+startRow = 3
+startCol = 1
+robots = [ Spot(startRow, startCol), AgileX(startRow, startCol), BlueROV2(startRow, startCol), IntelAero(startRow, startCol) ]
+
+#run auctions
+auction = Auction(robots, searchArea)
+auction.sequentialSingle(3, 1, Auction.BFS)
+auction.sequentialSingle(3, 1, Auction.DFS)
 auction.combinatorial(robots, searchArea)
 
 # Define Relationships

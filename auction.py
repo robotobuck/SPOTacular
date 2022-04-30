@@ -2,13 +2,13 @@ class Auction:
     """
     Auction class - operates different types of auctions
     """
-
     BFS = "bfs"
     DFS = "dfs"
-    def __init__(self):
-        pass
+    def __init__(self, robots, searchArea):
+        self.robots = robots
+        self.searchArea = searchArea
         
-    def sequentialSingle(self, robots, searchArea, row, col, type):
+    def sequentialSingle(self, row, col, type):
         """
         Sequential Single Bid Auction
         @params 
@@ -19,19 +19,19 @@ class Auction:
         type - type of search for auction
         """
         if type == Auction.BFS:
-            return self.__ssBFS(searchArea, row, col)
+            return self.__ssBFS(row, col)
         elif type == Auction.DFS:
-            return self.__ssDFS(searchArea, row, col)
+            return self.__ssDFS(row, col)
 
-    def __ssBFS(self, searchArea, row, col):
+    def __ssBFS(self, row, col):
         """
         Sequential Single Bid Auction using Bread First Search for order
         """
-        self.__resetGrid(searchArea)
+        self.__resetGrid()
         order = []  #order of auction
 
-        areas = [searchArea[row][col]]  #stack for bfs
-        searchArea[row][col].visited = True
+        areas = [self.searchArea[row][col]]  #stack for bfs
+        self.searchArea[row][col].visited = True
         while len(areas) > 0:
             current = areas[0]
             current.processed = True
@@ -40,47 +40,54 @@ class Auction:
             #add new grids if available
             nextRow = current.row
             nextCol = current.col - 1
-            if nextCol >= 0 and not searchArea[nextRow][nextCol].visited:
-                areas.append(searchArea[nextRow][nextCol])
-                searchArea[nextRow][nextCol].visited = True
+            if nextCol >= 0 and not self.searchArea[nextRow][nextCol].visited:
+                areas.append(self.searchArea[nextRow][nextCol])
+                self.searchArea[nextRow][nextCol].visited = True
 
             nextRow = current.row - 1 
             nextCol = current.col
-            if nextRow >= 0 and not searchArea[nextRow][nextCol].visited:
-                areas.append(searchArea[nextRow][nextCol])
-                searchArea[nextRow][nextCol].visited = True
+            if nextRow >= 0 and not self.searchArea[nextRow][nextCol].visited:
+                areas.append(self.searchArea[nextRow][nextCol])
+                self.searchArea[nextRow][nextCol].visited = True
             
             nextRow = current.row
             nextCol = current.col + 1
-            if nextCol < len(searchArea[0]) and not searchArea[nextRow][nextCol].visited:
-                areas.append(searchArea[nextRow][nextCol])
-                searchArea[nextRow][nextCol].visited = True
+            if nextCol < len(self.searchArea[0]) and not self.searchArea[nextRow][nextCol].visited:
+                areas.append(self.searchArea[nextRow][nextCol])
+                self.searchArea[nextRow][nextCol].visited = True
 
             nextRow = current.row + 1
             nextCol = current.col
-            if nextRow < len(searchArea) and not searchArea[nextRow][nextCol].visited:
-                areas.append(searchArea[nextRow][nextCol])
-                searchArea[nextRow][nextCol].visited = True
+            if nextRow < len(self.searchArea) and not self.searchArea[nextRow][nextCol].visited:
+                areas.append(self.searchArea[nextRow][nextCol])
+                self.searchArea[nextRow][nextCol].visited = True
 
             areas.remove(current)
 
         print('Auction Order: ', [(area.r+str(area.c)) for area in order])
+        self.__run(order)
 
-    def __resetGrid(self, searchArea):
-        for row in searchArea:
+    def __resetGrid(self):
+        for row in self.searchArea:
             for area in row:
                 area.visited = False
                 area.processed = False
 
-    def __ssDFS(self, searchArea, row, col):
+    def __run(self, order):
+        """
+        Execute auction
+        """
+        print("run auction")
+
+    def __ssDFS(self, row, col):
         """
         Sequential Single Bid Auction using Depth First Search for order
         """
-        self.__resetGrid(searchArea)
+        self.__resetGrid()
         order = []  #order of auction
 
-        areas = [searchArea[row][col]]  #stack for bfs
-        searchArea[row][col].visited = True
+        areas = [self.searchArea[row][col]]  #stack for bfs
+        self.searchArea[row][col].visited = True
         while len(areas) > 0:
             current = areas[len(areas)-1]
             added = False
@@ -88,31 +95,31 @@ class Auction:
             #add new grids if available
             nextRow = current.row
             nextCol = current.col - 1
-            if nextCol >= 0 and not searchArea[nextRow][nextCol].visited:
+            if nextCol >= 0 and not self.searchArea[nextRow][nextCol].visited:
                 added = True
-                areas.append(searchArea[nextRow][nextCol])
-                searchArea[nextRow][nextCol].visited = True
+                areas.append(self.searchArea[nextRow][nextCol])
+                self.searchArea[nextRow][nextCol].visited = True
 
             nextRow = current.row - 1 
             nextCol = current.col
-            if nextRow >= 0 and not searchArea[nextRow][nextCol].visited:
+            if nextRow >= 0 and not self.searchArea[nextRow][nextCol].visited:
                 added = True
-                areas.append(searchArea[nextRow][nextCol])
-                searchArea[nextRow][nextCol].visited = True
+                areas.append(self.searchArea[nextRow][nextCol])
+                self.searchArea[nextRow][nextCol].visited = True
             
             nextRow = current.row
             nextCol = current.col + 1
-            if nextCol < len(searchArea[0]) and not searchArea[nextRow][nextCol].visited:
+            if nextCol < len(self.searchArea[0]) and not self.searchArea[nextRow][nextCol].visited:
                 added = True
-                areas.append(searchArea[nextRow][nextCol])
-                searchArea[nextRow][nextCol].visited = True
+                areas.append(self.searchArea[nextRow][nextCol])
+                self.searchArea[nextRow][nextCol].visited = True
 
             nextRow = current.row + 1
             nextCol = current.col
-            if nextRow < len(searchArea) and not searchArea[nextRow][nextCol].visited:
+            if nextRow < len(self.searchArea) and not self.searchArea[nextRow][nextCol].visited:
                 added = True
-                areas.append(searchArea[nextRow][nextCol])
-                searchArea[nextRow][nextCol].visited = True
+                areas.append(self.searchArea[nextRow][nextCol])
+                self.searchArea[nextRow][nextCol].visited = True
 
             if not added:   #reached end of grid, begin to process
                 current.processed = True
@@ -122,6 +129,7 @@ class Auction:
         
 
         print('Auction Order: ', [(area.r+str(area.c)) for area in order])
+        self.__run(order)
 
     def combinatorial(self, robots, searchArea):
         """
