@@ -12,7 +12,7 @@ class Auction:
         self.robots = robots
         self.searchArea = searchArea
         
-    def sequentialSingle(self, row, col, type):
+    def sequentialSingle(self, row, col, type, limitByDistance, limitByTerrain):
         """
         Sequential Single Bid Auction
         @params 
@@ -21,13 +21,15 @@ class Auction:
         row - start row
         col - start column
         type - type of search for auction
+        limitByDistance - limit bidding by max distance?
+        limitByTerrain - limit bidding by terrain?
         """
         if type == Auction.BFS:
-            return self.__ssBFS(row, col)
+            return self.__ssBFS(row, col, limitByDistance, limitByTerrain)
         elif type == Auction.DFS:
-            return self.__ssDFS(row, col)
+            return self.__ssDFS(row, col, limitByDistance, limitByTerrain)
 
-    def __ssBFS(self, row, col):
+    def __ssBFS(self, row, col, limitByDistance, limitByTerrain):
         """
         Sequential Single Bid Auction using Bread First Search for order
         """
@@ -69,7 +71,7 @@ class Auction:
             areas.remove(current)
 
         print('Auction Order: ', [(area.r+str(area.c)) for area in order])
-        self.__run(order)
+        self.__run(order, limitByDistance, limitByTerrain)
 
     def __resetGrid(self):
         for row in self.searchArea:
@@ -77,27 +79,24 @@ class Auction:
                 area.visited = False
                 area.processed = False
 
-    def __run(self, order):
+    def __run(self, order, limitByDistance, limitByTerrain):
         """
         Execute auction
         """
-        print("Running Auction")
         self.__resetRobots()
         for area in order:
             bids = []
             winningBot = 0
-            winningBid = -1
-            for bot in range(len(self.robots)):
-                botBid = self.robots[bot].bidSingle(area, area.row, area.col)
+            winningBid = 0
+            for bot in self.robots:
+                botBid = bot.bidSingle(area, limitByDistance, limitByTerrain)
                 bids.append(botBid)
                 if botBid > winningBid:
                     winningBot = bot
                     winningBid = botBid
-            if winningBid >= 0:
-                self.robots[winningBot].assignArea(area)
-                self.robots[winningBot].row = area.row
-                self.robots[winningBot].col = area.col
-            # If no bid >= 0 no robot can survery the area
+            if winningBid > 0:
+                winningBot.assignArea(area)
+            # If no bid > 0 no robot can survery the area
         for bot in self.robots:
             print(f"Robot type \"{bot.getRobotType()}\" assigned to survey {len(bot.areaAssignments)} areas: ", [(area.r + str(area.c)) for area in bot.areaAssignments])
 
@@ -105,7 +104,7 @@ class Auction:
         for bot in self.robots:
             bot.areaAssignments = []
 
-    def __ssDFS(self, row, col):
+    def __ssDFS(self, row, col, limitByDistance, limitByTerrain):
         """
         Sequential Single Bid Auction using Depth First Search for order
         """
@@ -155,7 +154,7 @@ class Auction:
         
 
         print('Auction Order: ', [(area.r+str(area.c)) for area in order])
-        self.__run(order)
+        self.__run(order, limitByDistance, limitByTerrain)
 
     def combinatorial(self, robots, searchArea):
         """

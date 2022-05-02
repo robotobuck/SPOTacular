@@ -2,8 +2,8 @@ import utils
 
 
 class AreaToSurvey:
-    def __init__(self, length, width, environment, row, col):
-        self.__length = length
+    def __init__(self, height, width, environment, row, col):
+        self.__height = height
         self.__width = width
         self.__environmentType = environment
 
@@ -12,6 +12,7 @@ class AreaToSurvey:
         self.processed = False
         self.row = row
         self.col = col
+        self.center = { 'x':0, 'y':0 }
 
         if row == 0:
             self.r = 'A'
@@ -44,14 +45,14 @@ class AreaToSurvey:
             print(f"\nWarning!: Environment Type {self.__environmentType} not in list, being set to \'unkown\'\n")
         self.__environmentType = "unkown"
 
-    def getLength(self):
-        return self.__length
+    def getHeight(self):
+        return self.__height
   
     def getWidth(self):
         return self.__width
   
     def getSurfaceArea(self):
-        return self.__length * self.__width
+        return self.__height * self.__width
   
     def getEnvironmentType(self):
         return self.__environmentType
