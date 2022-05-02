@@ -1,6 +1,3 @@
-import utils
-
-
 class AreaToSurvey:
     def __init__(self, height, width, environment, row, col):
         self.__height = height
@@ -27,8 +24,6 @@ class AreaToSurvey:
 
         self.c = col
 
-        self.checkAndSetEnvironmentType()
-
     def __reset(self):
         self.visited = False
         self.processed = False
@@ -37,13 +32,7 @@ class AreaToSurvey:
         print("Area Details: ")
         print(f'Length: {self.__length}')
         print(f'Width: {self.__width}')
-        print(f'Type: {self.__environmentType}')
-
-    def checkAndSetEnvironmentType(self):
-        enviornmentOptions = utils.getAreaTypeList()
-        if self.__environmentType not in enviornmentOptions:
-            print(f"\nWarning!: Environment Type {self.__environmentType} not in list, being set to \'unkown\'\n")
-        self.__environmentType = "unkown"
+        print(f'Type: {self.__environmentType}') 
 
     def getHeight(self):
         return self.__height

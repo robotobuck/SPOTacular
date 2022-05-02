@@ -24,6 +24,10 @@ class Auction:
         limitByDistance - limit bidding by max distance?
         limitByTerrain - limit bidding by terrain?
         """
+
+        for bot in self.robots:
+            bot.reset()
+
         if type == Auction.BFS:
             return self.__ssBFS(row, col, limitByDistance, limitByTerrain)
         elif type == Auction.DFS:
@@ -35,7 +39,6 @@ class Auction:
         """
         self.__resetGrid()
         order = []  #order of auction
-
         areas = [self.searchArea[row][col]]  #stack for bfs
         self.searchArea[row][col].visited = True
         while len(areas) > 0:
@@ -83,7 +86,6 @@ class Auction:
         """
         Execute auction
         """
-        self.__resetRobots()
         for area in order:
             bids = []
             winningBot = 0
