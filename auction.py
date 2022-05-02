@@ -157,12 +157,3 @@ class Auction:
 
         print('Auction Order: ', [(area.r+str(area.c)) for area in order])
         self.__run(order, limitByDistance, limitByTerrain)
-
-    def combinatorial(self, robots, searchArea):
-        """
-        Combinatorial Bid Auction
-        @params 
-        robots - robot "bidders"
-        searchArea - area to search/auction
-        """
-        print("Combinatorial")

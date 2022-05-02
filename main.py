@@ -2,24 +2,6 @@ from area import AreaToSurvey
 from auction import Auction
 from robot import Spot, AgileX, BlueROV2, IntelAero
 
-# Constants
-#NUM_OF_ROBOTS = 5
-#NUM_OF_AREAS = 3
-## This will be replaced when real data becomes available
-## This should be called again for every new section of land to survey
-#robotData = []
-#for _ in range(NUM_OF_AREAS):
-#    robotData.append(randomRobotData.generateRandomData(NUM_OF_ROBOTS))
-#
-#print("Robot stats by area: ")
-#for areaStats in robotData:
-#    print(areaStats)
-#
-## Find best robot for each area
-#optimalRobots = auction.assignAreas(robotData)
-#print("Optimal Robots: ", optimalRobots)
-
-
 # Define search area
 searchArea = [ [AreaToSurvey(30, 60, 'wooded', 0, 0), AreaToSurvey(30, 60, 'rocky', 0, 1), AreaToSurvey(30, 45, 'grassy', 0, 2), AreaToSurvey(30, 30, 'grassy', 0, 3)],
             [AreaToSurvey(45, 60, 'wooded', 1, 0), AreaToSurvey(45, 60, 'rocky', 1, 1), AreaToSurvey(45, 45, 'grassy', 1, 2), AreaToSurvey(45, 30, 'grassy', 1, 3)],
@@ -61,13 +43,3 @@ auction.sequentialSingle(3, 1, Auction.BFS, True, True)
 print()
 auction.sequentialSingle(3, 1, Auction.DFS, True, True)
 print()
-auction.combinatorial(robots, searchArea)
-
-# Define Relationships
-#for r in range(len(searchArea)):
-#    row = searchArea[r]
-#    for c in range(len(row)):
-#        for robot in robots:
-#            print(robot.bidSimple(searchArea, r, c))
-#            relationship = RelationshipBetweenRobotAndArea(robot, searchArea[r][c])
-#            relationship.displayRelationshipInfo()
